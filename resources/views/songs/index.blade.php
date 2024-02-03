@@ -15,12 +15,19 @@
                 <div class="max-w-xl">
                     <p>Song List</p>
                     @foreach ($songs as $song )
-                        <div>
-                            {{ $song->name }}
-                            {{-- {{ url(asset('/songs/'.$song->name))}} --}}
-                            <audio controls>
-                                <source src="{{asset('/songs/'.$song->name)}}" type="audio/mpeg">
-                            </audio>
+                        <div class="mt-1 flex">
+                            <p>{{ $song->name }}</p>
+                            <button @click="handlePlayClick" x-data="{isPlaying:false}" class="text-center">
+                                <template x-if="!isPlaying">
+                                    <x-heroicon-s-play-circle class="w-6 h-6"/>
+                                </template>
+                                <template x-if="isPlaying">
+                                    <x-heroicon-s-pause-circle class="w-6 h-6"/>
+                                </template>
+                                <audio x-ref="sing">
+                                    <source src="{{asset('/songs/'.$song->name)}}" type="audio/mpeg">
+                                </audio>
+                            </button>
                         </div>
                     @endforeach
                 </div>
@@ -28,3 +35,17 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function handlePlayClick(e){
+        const song = this.$refs.sing
+        if (this.isPlaying) {
+            song.pause();
+            this.isPlaying = false;
+        } else {
+            song.play();
+            this.isPlaying = true;
+        }
+
+    }
+</script>

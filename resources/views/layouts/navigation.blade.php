@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('song.index')" :active="request()->routeIs('song.index')">
-                        {{ __('Songs')}}
+                        {{ __('Upload Song')}}
                     </x-nav-link>
                 </div>
             </div>

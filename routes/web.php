@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/song', [SongController::class, 'index'])->name('song.index');
     Route::post('/song', [SongController::class, 'store'])->name('song.store');
+
+    Route::patch('/update-token', [TokenController::class, 'update'])->name('token.update');
 });
 
 require __DIR__.'/auth.php';

@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\TokenController;
+use App\Models\Playlist;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/song', [SongController::class, 'store'])->name('song.store');
 
     Route::post('/update-token', [TokenController::class, 'update'])->name('token.update');
+
+    Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
 });
 
 require __DIR__.'/auth.php';

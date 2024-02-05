@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('song.index')" :active="request()->routeIs('song.index')">
                         {{ __('Upload Song')}}
                     </x-nav-link>
+                    <x-nav-link :href="route('playlists.index')" :active="request()->routeIs('playlists.index')">
+                        {{ __('Playlists')}}
+                    </x-nav-link>
                 </div>
             </div>
 

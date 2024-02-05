@@ -14,7 +14,7 @@ class TokenUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'token' => ['required', 'string', 'max:255'],
+            'token' => ['string', 'max:255'],
             'user_id' => ['required', 'numeric']
         ];
     }

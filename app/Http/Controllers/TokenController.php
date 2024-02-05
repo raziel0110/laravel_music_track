@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TokenUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\Request;
+use \App\Models\Token;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TokenController extends Controller
 {
@@ -15,12 +15,17 @@ class TokenController extends Controller
         return view();
     }
 
-    public function update(TokenUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-        $validated = $request->validated();
 
-        if ($validated) {
+        $user = $request->user();
+        $newToken = Str::random(100);
+        $token = Token::where('user_id', $user->id)->first();
 
+        if ($user->token !== null) {
+            $token->update(['token' => $newToken]);
+        } else {
+            Token::create(['token' => $newToken, 'user_id' => $user->id]);
         }
 
         return Redirect::route('profile.edit')->with('status', 'token-updated');

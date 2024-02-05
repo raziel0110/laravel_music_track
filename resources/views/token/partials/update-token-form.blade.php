@@ -4,9 +4,8 @@
     </h2>
 
     @if ($user->token)
-        <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+        <form method="post" action="{{ route('token.update') }}" class="mt-6 space-y-6">
             @csrf
-            @method('patch')
 
             <div>
                 <x-input-label for="Token" :value="__('Token')" />
@@ -33,18 +32,23 @@
             {{ __("The token needs to be generated!") }}
         </p>
         <div class="flex items-center gap-4 mt-3">
-            <x-primary-button>{{__('Generate Token')}}</x-primary-button>
-            @if (session('status') === 'token-updated')
-                <p
-                    x-data="{show: true}"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >
-                {{__('Token Generated')}}
-                </p>
-            @endif
+            <form method="post" action="{{route('token.update')}}">
+                @csrf
+                {{-- @method('PUT') --}}
+
+                <x-primary-button>{{__('Generate Token')}}</x-primary-button>
+                @if (session('status') === 'token-updated')
+                    <p
+                        x-data="{show: true}"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm text-gray-600 dark:text-gray-400"
+                    >
+                    {{__('Token Generated')}}
+                    </p>
+                @endif
+            </form>
         </div>
     @endif
 </section>

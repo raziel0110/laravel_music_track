@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-token', [TokenController::class, 'update'])->name('token.update');
 
     Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
+    Route::post('/playlists', [PlaylistController::class, 'create'])->name('playlists.create');
 });
 
 require __DIR__.'/auth.php';

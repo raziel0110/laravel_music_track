@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Once your account is uploaded, all of its resources can be deleted later.') }}
+            {{ __('Every user can manage his music playlists, by creating, updating or deleting them.') }}
         </p>
     </header>
 </section>

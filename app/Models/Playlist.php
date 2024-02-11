@@ -11,6 +11,11 @@ class Playlist extends Model
 
     protected $fillable = ['name', 'user_id', 'active'];
 
+    public function isActive()
+    {
+        return $this->active;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

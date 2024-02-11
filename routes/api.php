@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\SongController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/songs', [SongController::class, 'songs']);
+Route::get('/playlists', [PlaylistController::class, 'playlists']);
+Route::post('/playlists', [PlaylistController::class, 'apiCreate']);
+Route::delete('/playlists/{id}', [PlaylistController::class, 'apiDestroy']);

@@ -20,7 +20,7 @@
                             <div class="mt-3">
                                 <x-input-label for="playlist-name" :value="__('Name')" />
                                 <x-text-input id="playlist-name" class="block mt-1 w-full" type="text" name="name" required autocomplete="name" />
-                                {{-- <x-input-error :messages="$errors->get('name')" class="mt-2" /> --}}
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
 
                             <div class="mt-6 mb-6 flex justify-end">
@@ -42,9 +42,31 @@
     <div class="py-3 h-full">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-3">
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl" >
+                @if ($playlists->isEmpty())
+                    <div>
+                        No playlists found!
+                    </div>
+                @endif
 
-                </div>
+                @foreach ($playlists as $playlist)
+                    <div class="mt-3 px-3">
+                        <div class="flex justify-between">
+                            <div>
+                                {{ $playlist->name }}
+                            </div>
+                            <div>
+                                <form action="{{route('playlist.destroy', $playlist->id)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <x-primary-button>
+                                        <x-heroicon-s-trash class="text-neutral-600 w-5 h-5"/>
+                                    </x-primary-button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>

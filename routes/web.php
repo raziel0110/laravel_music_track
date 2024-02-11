@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/playlists', [PlaylistController::class, 'index'])->name('playlists.index');
     Route::post('/playlists', [PlaylistController::class, 'create'])->name('playlists.create');
+    Route::delete('playlists/{playlist}', [PlaylistController::class, 'destroy'])->name('playlist.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -11,7 +11,9 @@ class PlaylistController extends Controller
 {
     public function index()
     {
-        $playlists = Playlist::where('user_id', Auth::user());
+        $user = Auth::user();
+
+        $playlists = Playlist::where('user_id', $user->id)->get();
 
         return view('playlists.index', ['playlists' => $playlists]);
     }
@@ -19,12 +21,28 @@ class PlaylistController extends Controller
     public function create(Request $request)
     {
         $user = Auth::user();
+
         $request->validate([
             'name' => ['required', 'max:255']
         ]);
 
-        Playlist::create(['user_id' => $user->id, 'name' => $request->name]);
+        $activePlaylist = Playlist::where('active',  true)->first();
+
+        if($activePlaylist) {
+            $activePlaylist->update(['active' => false]);
+        }
+
+        Playlist::create (['user_id' => $user->id, 'name' => $request->name, 'active' => true]);
 
         return Redirect::route('playlists.index')->with('status', 'playlist-created');
+    }
+
+    public function destroy($id)
+    {
+        $playlist = Playlist::find($id);
+
+        $playlist->delete();
+
+        return Redirect::route('playlists.index')->with('status', 'playlist-destroy');
     }
 }

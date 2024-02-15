@@ -88,4 +88,16 @@ class PlaylistController extends Controller
 
         return response()->json(["mesasge" => 'ok'], 200);
     }
+
+    public function apiAddSongToPlaylist(Request $request, $id)
+    {
+        $playlist = Playlist::find($id);
+        $playlist->songs()->sync($request->songs[0]);
+    }
+
+    public function apiRemoveSongFromPlaylist(Request $request, $id)
+    {
+        $playlist = Playlist::find($id);
+        $playlist->songs()->detach($request->songs[0]);
+    }
 }

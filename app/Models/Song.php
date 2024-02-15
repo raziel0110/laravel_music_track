@@ -10,4 +10,9 @@ class Song extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function playlists()
+    {
+        $this->belongsToMany(Playlist::class);
+    }
 }

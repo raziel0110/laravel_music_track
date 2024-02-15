@@ -24,3 +24,5 @@ Route::get('/songs', [SongController::class, 'songs']);
 Route::get('/playlists', [PlaylistController::class, 'playlists']);
 Route::post('/playlists', [PlaylistController::class, 'apiCreate']);
 Route::delete('/playlists/{id}', [PlaylistController::class, 'apiDestroy']);
+Route::post('/playlist/{id}', [PlaylistController::class, 'apiAddSongToPlaylist']);
+Route::delete('/playlist/{id}', [PlaylistController::class, 'apiRemoveSongFromPlaylist']);
